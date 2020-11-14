@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
     */
    // store the input data as vectors and pair 
     vector< pair<int, int> > data(n);  
-    for(int i = 0; i < n/2 ; i++)
+    for(int i = 0; i < n/2 ; ++i)
     {
         pair<int, int> temp;
         fin >> start >> end;
@@ -68,7 +68,7 @@ int main(int argc, char* argv[])
     
     fout << cnt << endl;  // write in the total chord number
 
-    for (int i = 0; i < output.size(); i++) 
+    for (int i = 0; i < output.size(); ++i) 
     {
         fout << output[i] << " " << data[output[i]].second << endl; // how about the last line? do we need endl?
     }
