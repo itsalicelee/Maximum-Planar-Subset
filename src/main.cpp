@@ -1,7 +1,7 @@
 // **************************************************************************
 //  File       [main.cpp]
 //  Author     [Pin-Hua Lee]
-//  Synopsis   [The main program of 2019 fall Algorithm PA2]
+//  Synopsis   [The main program of 2020 fall Algorithm PA2]
 // **************************************************************************
 
 #include<iostream>
@@ -49,19 +49,10 @@ int main(int argc, char* argv[])
     }
     fin >> junk;
 
-    // cout << "initial data" << endl;
-    // for (int i=0; i<n; i++) // print the data
-    // { 
-    //     // "first" and "second" are used to access 
-    //     // 1st and 2nd element of pair respectively 
-    //     cout << data[i].first << " "
-    //          << data[i].second << endl; 
-    // } 
-    
-
     //////////// algorithm start ////////////////
     tmusg.periodStart();
     vector<int> output = findPair(data, n);
+    
 
     tmusg.getPeriodUsage(stat);
     cout <<"The total CPU time: " << (stat.uTime + stat.sTime) / 1000.0 << "ms" << endl;
@@ -70,20 +61,19 @@ int main(int argc, char* argv[])
     //////////// write the output file ///////////
 
     int cnt = output.back();   // the last element in output is the number of output line
-    output.pop_back();
-    //cout << output.size();
-    sort(output.begin(), output.begin()+cnt);
+    output.pop_back();  // delete the last element
+    sort(output.begin(), output.begin()+cnt);  // sort by the first element
     fout << cnt << endl;
 
     for (int i = 0; i < output.size(); i++) 
     {
-        fout << output[i] << " " << data[output[i]].second << endl; // is the order correct??
+        fout << output[i] << " " << data[output[i]].second << endl; // how about the last line? do we need endl?
     }
     fin.close();
     fout.close();
-    return 0;
+    
 
-return 0;
+    return 0;
 }
 
 
