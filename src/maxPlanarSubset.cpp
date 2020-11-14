@@ -47,7 +47,7 @@ void findChord(vector< pair<int,int> >& data,  vector<int>& result, vector< vect
 {   /*Save the start point of the chord into result and recursively call itself*/
 
     while(s[i][j] == 1 && j > 0) // if case1: we dont want this j
-        j--;
+        --j;
 
     int size = s.size();
     if(i >= size || j <= 0) // terminate condition
