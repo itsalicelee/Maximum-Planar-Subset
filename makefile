@@ -7,7 +7,7 @@ ARFLAGS = rcv
 # -g option is for debugging version
 # -O2 option is for optimized version
 DBGFLAGS = -g -D_DEBUG_ON_
-OPTFLAGS = -O2
+OPTFLAGS = -O3
 
 all	: bin/mps
 	@echo -n ""

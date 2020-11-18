@@ -9,7 +9,7 @@
 #include<fstream>
 #include"maxPlanarSubset.h"
 #include<utility>
-#include "../lib/tm_usage.h"
+//#include "../lib/tm_usage.h"
 using namespace std;
 
 
@@ -23,11 +23,11 @@ int main(int argc, char* argv[])
         help_message(); 
         return 0;
     }
-    CommonNs::TmUsage tmusg; 
-    CommonNs::TmStat stat;
+    // CommonNs::TmUsage tmusg; 
+    // CommonNs::TmStat stat;
     //////////// read the input file /////////////
     
-    char buffer[200];
+    //char buffer[200];
     fstream fin(argv[1]);
     fstream fout;
     fout.open(argv[2],ios::out);
@@ -54,10 +54,10 @@ int main(int argc, char* argv[])
     fin >> junk;
 
     //////////// algorithm start ////////////////
-    tmusg.periodStart();
+    //tmusg.periodStart();
     vector<int> output = findPair(data, n);
-    tmusg.getPeriodUsage(stat);
-    cout <<"The total CPU time: " << (stat.uTime + stat.sTime) / 1000.0 << "ms" << endl;
+    //tmusg.getPeriodUsage(stat);
+    //cout <<"The total CPU time: " << (stat.uTime + stat.sTime) / 1000.0 << "ms" << endl;
     
 
     //////////// write the output file ///////////

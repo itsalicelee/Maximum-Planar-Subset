@@ -41,14 +41,14 @@ echo "$fileName"
 echo "$stuid"
 
 
-if [ ! -d ${stuid}_pa1 ]; then
-    echo "**ERROR Cannot find directory <student id>_pa1"
+if [ ! -d ${stuid}_pa2 ]; then
+    echo "**ERROR Cannot find directory <student id>_pa2"
     cd ..
     rm -rf check_$$
     exit
 fi
 
-cd ${stuid}_pa1
+cd ${stuid}_pa2
 echo "checking README ..."
 if [ ! -f README ]; then
     echo "**ERROR Cannot find README"

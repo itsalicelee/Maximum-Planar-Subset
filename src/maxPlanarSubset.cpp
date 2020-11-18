@@ -26,7 +26,7 @@ vector<int> findPair(vector< pair<int,int> >& data, int n)
             }
             else  
             {
-                if(m[i][j-1] < m[i][k-1]+ 1 + m[k+1][j-1]) // case3 (but what if m[i][j-1] = m[i][k-1]+ 1 + m[k+1][j-1])
+                if(m[i][j-1] <= m[i][k-1]+ 1 + m[k+1][j-1]) // case3 (but what if m[i][j-1] = m[i][k-1]+ 1 + m[k+1][j-1])
                 {
                     m[i][j] = m[i][k-1]+ 1 + m[k+1][j-1];
                     s[i][j] = 3; 
