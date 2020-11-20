@@ -9,12 +9,12 @@
 #include<fstream>
 #include"maxPlanarSubset.h"
 #include<utility>
-//#include "../lib/tm_usage.h"
+#include "../lib/tm_usage.h"
 using namespace std;
 
 
 void help_message() {
-    cout << "usage: ./bin/mps inputs/<input file> outputs/<output file>" << endl;
+    cout << "usage: ./bin/mps inputs/<input file> outputs/<output file>" << "\n";
 }
 
 int main(int argc, char* argv[])
@@ -23,8 +23,8 @@ int main(int argc, char* argv[])
         help_message(); 
         return 0;
     }
-    // CommonNs::TmUsage tmusg; 
-    // CommonNs::TmStat stat;
+    CommonNs::TmUsage tmusg; 
+    CommonNs::TmStat stat;
     //////////// read the input file /////////////
     
     //char buffer[200];
@@ -42,11 +42,11 @@ int main(int argc, char* argv[])
     4 9 6 10 0 7 2 5 11 1  3  8 
     Note: access element in pairs by using aPair.first, aPair.second
     */
+
    // store the input data as vectors and pair 
     vector< pair<int, int> > data(n);  
-    for(int i = 0; i < n/2 ; ++i)
+    for(size_t i = 0; i < n/2 ; ++i)
     {
-        pair<int, int> temp;
         fin >> start >> end;
         data[start] = make_pair(start, end);
         data[end] = make_pair(end, start);
@@ -54,23 +54,25 @@ int main(int argc, char* argv[])
     fin >> junk;
 
     //////////// algorithm start ////////////////
-    //tmusg.periodStart();
+    tmusg.periodStart();
     vector<int> output = findPair(data, n);
-    //tmusg.getPeriodUsage(stat);
-    //cout <<"The total CPU time: " << (stat.uTime + stat.sTime) / 1000.0 << "ms" << endl;
+    tmusg.getPeriodUsage(stat);
+    cout <<"The total CPU time: " << (stat.uTime + stat.sTime) / 1000.0 << "ms" << "\n";
     
 
     //////////// write the output file ///////////
 
-    int cnt = output.back();   // the last element in output is the number of output line
-    output.pop_back();  // delete the last element
+    int cnt = output.front();   // the first element in output is the number of output line
+    output.erase(output.begin());  // delete the first element
+    for(size_t i = 0; i < output.size(); ++i)
+        output[i] = data[output[i]].second;
     sort(output.begin(), output.begin()+cnt);  // sort by the first element
     
     fout << cnt << endl;  // write in the total chord number
 
-    for (int i = 0; i < output.size(); ++i) 
+    for (size_t i = 0; i < output.size(); ++i) 
     {
-        fout << output[i] << " " << data[output[i]].second << endl; // how about the last line? do we need endl?
+        fout << output[i] << " " << data[output[i]].second << "\n";
     }
     fin.close();
     fout.close();

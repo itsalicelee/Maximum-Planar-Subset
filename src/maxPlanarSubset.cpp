@@ -7,12 +7,12 @@ vector<int> findPair(vector< pair<int,int> >& data, int n)
     /*Given input data and number of chords, fill in m table and s table 
     call the findChord function to  trace back the chords and return the result as a vector*/
 
-    vector<vector<int> > m( n , vector<int> (n, 0));  // m is for storing count of chords
-    vector<vector<int> > s( n , vector<int> (n, 1));  // s is for saving which case, initialize with case1
+    vector<vector<unsigned short> > m( n , vector<unsigned short> (n, 0));  // m is for storing count of chords
+    vector<vector<char> > s( n , vector<char> (n, 1));  // s is for saving which case, initialize with case1
 
-    for(int d = 1; d < n; ++d)
+    for(size_t d = 1; d < n; ++d)
     {   
-        for(int i = 0; i < n-d; ++i)
+        for(size_t i = 0; i < n-d; ++i)
         {   
             int j = i + d;
             int k = data[j].second;
@@ -36,35 +36,38 @@ vector<int> findPair(vector< pair<int,int> >& data, int n)
             }
         }
     }
-
     vector<int> result;
-    findChord(data, result, s, 0, n-1);  // find from (0,n-1) trace back the chord
     result.push_back(m[0][n-1]);  // add total chord count to the last element
+    // free the memory space
+    // for(int i = 0; i < m.size(); i++)
+    //     vector<unsigned short>().swap(m[i]);
+    // vector< vector<unsigned short> > ().swap(m);
+
+    findChord(data, result, s, 0, n-1);  // find from (0,n-1) trace back the chord
+    
     return result;
 }
 
-void findChord(vector< pair<int,int> >& data,  vector<int>& result, vector< vector<int> >& s, int i, int j)
+void findChord(vector< pair<int,int> >& data,  vector<int>& result, vector< vector<char> >& s, int i, int j)
 {   /*Save the start point of the chord into result and recursively call itself*/
-
+    //cout << "i: " << i << ", j: " << j << endl;
     while(s[i][j] == 1 && j > 0) // if case1: we dont want this j
         --j;
 
-    int size = s.size();
-    if(i >= size || j <= 0) // terminate condition
+    if(i >= s.size() || j <= 0) // terminate condition
         return;
-    else  // do not terminate 
+    unsigned short temp = j;
+    if(s[i][j] == 2) // if case2: k is i, so we must choose k
     {
-        if(s[i][j] == 2) // if case2: k is i, so we must choose k
-        {
-            result.push_back(j);
-            findChord(data, result, s,  i+1, j-1);    
-        }
-        
-        else if(s[i][j] == 3)  // if case3: 
-        {
-        result.push_back(j);
+        result.push_back(temp);
+        findChord(data, result, s,  i+1, j-1);    
+    }
+    
+    else if(s[i][j] == 3)  // if case3: 
+    {
+        result.push_back(temp);
         findChord(data, result, s,  i, data[j].second-1);
         findChord(data, result, s, data[j].second + 1, j-1);
-        }
     }
+    
 }

@@ -1,10 +1,10 @@
 #!/bin/bash
 
 #############################################################################
-# File       [ checkSubmitPA1.sh ]
+# File       [ checkSubmitPA2.sh ]
 # Author     [ funnymean ]
 # Modified   [ 2020/09/21 by Yu-Sheng Lu]
-# Synopsis   [ simple test for algorithm PA1 homework format program ]
+# Synopsis   [ simple test for algorithm PA2 homework format program ]
 # Date       [ Ver. 1.5 started 2020/09/21 ]
 #############################################################################
 
